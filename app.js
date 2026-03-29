@@ -53,6 +53,6 @@ function sendToBot(text) {
 
 // دالة التحويل للواتساب الحقيقي
 function redirectToWhatsApp() {
-    const myNumber = "966XXXXXXXXX"; // ضع رقمك هنا بدون +
+    const myNumber = "84926426273"; // ضع رقمك هنا بدون +
     window.location.href = `https://api.whatsapp.com/send?phone=${myNumber}&text=Hello%20Doctor!%20Everything%20is%20ready.`;
 }
